@@ -4,9 +4,9 @@ This is a dummy playground project to demonstrate the integration between Apache
 
 ## Components
 
-    1. Apache Pulsar (a standalone cluster up and running)
-    2. Apache Spark (check below how to setup a standalone cluster)
-    3. Pulsar Spark Connector
+1. Apache Pulsar (a standalone cluster up and running)
+2. Apache Spark (check below how to setup a standalone cluster)
+3. Pulsar Spark Connector
 
 You can check this repository [Apache Pulsar Playground](https://github.com/christiano/pulsar_playground) as reference and a sample for the `producer` and the `consumer`, a sample application in Java. 
 
@@ -14,9 +14,9 @@ You can check this repository [Apache Pulsar Playground](https://github.com/chri
 
 This project has been tested with Apache Spark 3.2.1
 
-    1. Download the Apache Spark 3.2.1
-    2. Start the master: `./sbin/start-master.sh`
-    3. Start the worker: `./sbin/start-worker.sh spark://localhost.localdomain:7077` (the URL may differ, check the logs from the master to get the correct url)
+1. Download the Apache Spark 3.2.1
+2. Start the master: `./sbin/start-master.sh`
+3. Start the worker: `./sbin/start-worker.sh spark://localhost.localdomain:7077` (the URL may differ, check the logs from the master to get the correct url)
 
 ## Build the jar
 
