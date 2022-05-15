@@ -51,3 +51,36 @@ The same for pyspark:
 ```
 pyspark  --packages io.streamnative.connectors:pulsar-spark-connector_2.12:3.1.1.3
 ```
+
+## Enable support for Apache Iceberg
+
+Follow these steps to enable support for Apache Iceberg tables:
+
+### Create a Iceberg table
+
+Enter Spark SQL using the following command, be careful with the path of the `warehouse`, this is the location of the data (the "lake").
+
+```
+spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:0.13.1\
+    --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
+    --conf spark.sql.catalog.spark_catalog=org.apache.iceberg.spark.SparkSessionCatalog \
+    --conf spark.sql.catalog.spark_catalog.type=hive \
+    --conf spark.sql.catalog.local=org.apache.iceberg.spark.SparkCatalog \
+    --conf spark.sql.catalog.local.type=hadoop \
+    --conf spark.sql.catalog.local.warehouse=$PWD/warehouse
+```
+
+Create the table:
+
+```
+CREATE TABLE local.db.user (firstName string, lastName string, city string, country string) USING iceberg;
+```
+
+Update the `Main.scala` with the correct path for the `warehouse`.
+
+### Submit a Spark job with Pulsar and Iceberg support
+
+```
+spark-submit --master spark://localhost.localdomain:7077 --packages io.streamnative.connectors:pulsar-spark-connector_2.12:3.1.1.3,org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:0.13.1 spark_pulsar_playground_2.12-1.0.jar
+```
+

@@ -4,6 +4,8 @@ import org.apache.spark.sql.SparkSession
 
 object Main extends App {
 
+  val datalakePath = "/home/anderson/var/iceberg/"
+
   val spark = SparkSession
     .builder()
     .appName("PulsarPlaygroundUsers")
@@ -24,9 +26,9 @@ object Main extends App {
   val streamQuery = userDF
     .select("firstName", "lastName", "city", "country")
     .writeStream
-    .format("parquet")
-    .option("path", "/home/anderson/var/datalake/users")
-    .option("checkpointLocation", "/home/anderson/var/datalake/checkpoint")
+    .format("iceberg")
+    .option("path", datalakePath + "warehouse/db/user")
+    .option("checkpointLocation", datalakePath + "checkpoint")
     .outputMode("append")
     .start()
 }
