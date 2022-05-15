@@ -1,12 +1,13 @@
 # Spark Pulsar Playground with Apache Iceberg table support
 
-This is a dummy playground project to demonstrate the integration between Apache Spark and Apache Pulsar. It generates `parquet` files as output, simulating a simple Data Lake (ingestion, streaming, lake). 
+This is a dummy playground project to demonstrate the integration between Apache Spark and Apache Pulsar. It generates `parquet` files as output (or Apache Iceberg tables if enabled), simulating a simple Data Lake (ingestion, streaming, lake). 
 
 ## Components
 
 1. Apache Pulsar (a standalone cluster up and running)
 2. Apache Spark (check below how to setup a standalone cluster)
 3. Pulsar Spark Connector
+4. Optional: Apache Iceberg support
 
 You can check this repository [Apache Pulsar Playground](https://github.com/christiano/pulsar_playground) as reference and a sample for the `producer` and the `consumer`, a sample application in Java. 
 
