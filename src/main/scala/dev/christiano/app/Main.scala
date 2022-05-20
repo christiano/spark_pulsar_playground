@@ -1,10 +1,11 @@
 package dev.christiano.app
 
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.streaming.Trigger
 
 object Main extends App {
 
-  val datalakePath = "/home/anderson/var/iceberg/"
+  val datalakePath = "/home/anderson/var/datalake/iceberg/"
 
   val spark = SparkSession
     .builder()
@@ -27,6 +28,7 @@ object Main extends App {
     .select("firstName", "lastName", "city", "country")
     .writeStream
     .format("iceberg")
+    .trigger(Trigger.ProcessingTime("60 seconds"))
     .option("path", datalakePath + "warehouse/db/user")
     .option("checkpointLocation", datalakePath + "checkpoint")
     .outputMode("append")
